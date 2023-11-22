@@ -11,7 +11,7 @@ GROUP By location, continent)
 select SUM(total_cases) as total_cases_world2023, SUM(total_deaths) as total_deaths_world2023, SUM(total_tests) as total_tests_world23, SUM(total_vaccinations) as total_vaccinations23
 from cte
 
---–-Creating View to store data for later queries
+--â€“-Creating View to store data for later queries
 Create View total_statistics as SELECT Continent, Location, population, MAX(CAST(total_cases as float)) as total_cases, MAX(CAST(total_deaths as float)) as total_deaths, 
 MAX(CAST(total_tests as float)) as total_tests,MAX(CAST(total_vaccinations as float)) as total_vaccinations
 FROM dbo.Covid23
