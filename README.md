@@ -21,4 +21,4 @@ Asia had the highest total cases per continent, followed by Europe, North Americ
 Europe had the total number of deaths recorded as per continent, followed by Asia, North America, South America, Africa
 
 ## Visualization
-I created [Tableau] (https://public.tableau.com/app/profile/alina.domina/viz/Covidvisualization_17010201503350/Dashboard1) dashboard report to visually represent the insights and trends obtained from this analysis
+I created [Tableau](https://public.tableau.com/app/profile/alina.domina/viz/Covidvisualization_17010201503350/Dashboard1) dashboard report to visually represent the insights and trends obtained from this analysis
