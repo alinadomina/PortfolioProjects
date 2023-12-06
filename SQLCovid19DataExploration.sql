@@ -6,29 +6,34 @@ Skills used: Joins, CTE's, Aggregate Functions, Creating Views, Converting Data 
 
 -- Looking at data from 1st January 2020 to 15 November 2023
 -- We use WHERE continent is not NULL, because if you check in the excel sheet, some locations have the names of the continent in them, 
--- and continet column for such contain NULL
+-- and continent column for such lines contains NULL
 SELECT *
 FROM DataExploration.dbo.cases_death_covid
 WHERE continent is not NULL 
 
--- Convert data type of numeric columns from varchar to bigint
+-- Converting data type of numeric columns from varchar to bigint
 ALTER TABLE DataExploration.dbo.cases_death_covid
 ALTER COLUMN total_cases bigint, total_deaths bigint, population bigint, people_fully_vaccinated bigint
 
--- Looking at total cases and deaths in the world. Created cte to find the numbers for the 15.11.23 .
+-- Looking at total cases and deaths in the world. Creating cte to find the numbers for the 15.11.23 .
 -- And then calculated the sum of each country numbers
-with cte as (SELECT Continent, Location, MAX(total_cases) as total_cases, MAX(total_deaths) as total_deaths
+with cte as (
+    SELECT Continent, Location, MAX(total_cases) as total_cases, MAX(total_deaths) as total_deaths
 FROM DataExploration.dbo.cases_death_covid
 WHERE continent is not NULL
-GROUP By location, continent)
-select SUM(total_cases) as total_cases_world2023, SUM(total_deaths) as total_deaths_world2023
+GROUP By location, continent
+)
+select SUM(total_cases) as total_cases_world2023, SUM(total_deaths) as total_deaths_world2023, 
+ROUND((CAST(SUM(total_deaths) as float)/SUM(total_cases)*100),3) as GlobalDeathPercentage
 from cte
 
 -- Looking at total cases and total death by continent
-with cte2 as (SELECT Continent, Location, population, MAX(total_cases) as total_cases, MAX(total_deaths) as total_deaths
+with cte2 as (
+    SELECT Continent, Location, population, MAX(total_cases) as total_cases, MAX(total_deaths) as total_deaths
 FROM DataExploration.dbo.cases_death_covid
 WHERE continent is not NULL
-GROUP By location, continent,population)
+GROUP By location, continent,population
+)
 select continent, SUM(total_cases) as total_cases_continent, SUM(total_deaths) as total_deaths_continent
 from cte2
 GROUP BY continent
