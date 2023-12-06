@@ -35,7 +35,7 @@ FROM DataExploration.dbo.Covid23
 WHERE continent is not NULL
 GROUP By location, continent,population
 
--- Looking at PercentPopulationInfected, DeathPercentage in the UK
+-- Looking at PercentPopulationInfected, DeathPercentage in the United Kingdom
 SELECT location,date, population, total_cases,total_deaths,people_fully_vaccinated,round((CAST(total_cases as float)/population*100),2) as PercentPopulationInfected,
 round(CAST(total_deaths as float)/CAST(total_cases as float)*100,2) as DeathPercentage, ROUND((CAST(people_fully_vaccinated as float)/population)*100,2) as percent_vaccinated
 from DataExploration.dbo.Covid23
@@ -57,7 +57,7 @@ SELECT location,total_cases,total_deaths,round(CAST(total_deaths as float)/CAST(
 from DataExploration.dbo.total_statistics
 ORDER BY percent_deaths DESC 
 
--- Comparing DeathPercentage vs VaccinationPercentage
+-- Comparing DeathPercentage vs VaccinationPercentage 2
 SELECT total_statistics.location,total_statistics.population,total_cases,total_deaths, people_fully_vaccinated,
 round(CAST(total_deaths as float)/CAST(total_cases as float)*100,2) as percent_deaths, 
 ROUND((CAST(people_fully_vaccinated as float)/total_statistics.population)*100,2) as percent_vaccinated
