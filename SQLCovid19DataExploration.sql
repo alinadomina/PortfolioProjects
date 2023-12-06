@@ -34,7 +34,7 @@ from cte2
 GROUP BY continent
 ORDER BY continent
 
--- Creating View to store data for later queries with data for 15.11.23 
+-- Creating View to store data for later queries with total numbers of cases and deaths dated 15.11.23 
 Create View total_statistics as SELECT Continent, Location, population, MAX(total_cases) as total_cases, 
 MAX(total_deaths) as total_deaths
 FROM DataExploration.dbo.cases_death_covid
@@ -51,7 +51,7 @@ WHERE location = 'United Kingdom'
 ORDER BY 1,2
 
 -- Looking at the countries with highest infection rate compared to population
-SELECT location,total_cases, population, round((CAST(total_cases as float)/population*100),2) as PercentPopulationInfected
+SELECT location,total_cases, population, ROUND((CAST(total_cases as float)/population*100),2) as PercentPopulationInfected
 FROM  DataExploration.dbo.total_statistics
 ORDER BY percent_population_infected DESC
 
@@ -61,6 +61,7 @@ FROM DataExploration.dbo.total_statistics
 Order by total_deaths DESC
 
 -- Looking at Countries with Highest Death Percent 
+-- Shows Likelihood of dying if you contact covid in your country
 SELECT location,total_cases,total_deaths, ROUND(CAST(total_deaths as float)/CAST(total_cases as float)*100,2) as DeathPercentage
 from DataExploration.dbo.total_statistics
 ORDER BY percent_deaths DESC 
