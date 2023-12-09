@@ -1,6 +1,6 @@
 /*
-Covid 19 Data Exploration1st January 2020 to 15 November 2023.
-Date range from 
+Covid 19 Data Exploration
+Date range from 1st January 2020 to 15 November 2023.
 Skills used: Joins, CTE's, Aggregate Functions, Creating Views, Converting Data Types
 */
 
